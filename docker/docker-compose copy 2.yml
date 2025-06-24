@@ -30,6 +30,18 @@ services:
     networks:
       - ragflow
 
+  es01:
+    image: docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
+    container_name: ragflow-es01
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=true
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+    ports:
+      - "${ES_PORT}:9200"
+    networks:
+      - ragflow
+
   minio:
     image: minio/minio
     container_name: ragflow-minio
@@ -42,16 +54,6 @@ services:
       MINIO_ROOT_PASSWORD: ${MINIO_PASSWORD}
     volumes:
       - minio_data:/data
-    networks:
-      - ragflow
-
-  infinity:
-    image: infiniflow/infinity:nightly
-    container_name: ragflow-infinity
-    ports:
-      - "23817:23817"
-    environment:
-      - MEM_LIMIT=4g
     networks:
       - ragflow
 
@@ -81,18 +83,15 @@ services:
       - TZ=${TIMEZONE}
       - HF_ENDPOINT=${HF_ENDPOINT}
       - MACOS=${MACOS}
-      - OLLAMA_BASE_URL=http://ollama:11434
     networks:
       - ragflow
     restart: on-failure
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    profiles: [infinity]
 
 volumes:
   mysql_data:
   minio_data:
-  ollama_data:
 
 networks:
   ragflow:

@@ -7,17 +7,15 @@ services:
     ports:
       - "${MYSQL_PORT}:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DBNAME}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-    volumes:
-      - mysql_data:/var/lib/mysql
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
       timeout: 5s
       retries: 5
+    volumes:
+      - mysql_data:/var/lib/mysql
     networks:
       - ragflow
 
@@ -27,6 +25,18 @@ services:
     ports:
       - "${REDIS_PORT}:6379"
     command: redis-server --requirepass ${REDIS_PASSWORD}
+    networks:
+      - ragflow
+
+  es01:
+    image: docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
+    container_name: ragflow-es01
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=true
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+    ports:
+      - "${ES_PORT}:9200"
     networks:
       - ragflow
 
@@ -42,16 +52,6 @@ services:
       MINIO_ROOT_PASSWORD: ${MINIO_PASSWORD}
     volumes:
       - minio_data:/data
-    networks:
-      - ragflow
-
-  infinity:
-    image: infiniflow/infinity:nightly
-    container_name: ragflow-infinity
-    ports:
-      - "23817:23817"
-    environment:
-      - MEM_LIMIT=4g
     networks:
       - ragflow
 
@@ -81,18 +81,15 @@ services:
       - TZ=${TIMEZONE}
       - HF_ENDPOINT=${HF_ENDPOINT}
       - MACOS=${MACOS}
-      - OLLAMA_BASE_URL=http://ollama:11434
     networks:
       - ragflow
     restart: on-failure
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    profiles: [infinity]
 
 volumes:
   mysql_data:
   minio_data:
-  ollama_data:
 
 networks:
   ragflow:
