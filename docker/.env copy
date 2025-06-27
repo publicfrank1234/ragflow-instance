@@ -44,7 +44,7 @@ REDIS_PASSWORD=infini_rag_flow
 SVR_HTTP_PORT=9380
 
 # Docker image for UI-only (no models)
-RAGFLOW_IMAGE=infiniflow/ragflow:nightly-slim
+RAGFLOW_IMAGE=infiniflow/infinity:v0.5.2
 
 # Local Timezone
 TIMEZONE=Asia/Kolkata
