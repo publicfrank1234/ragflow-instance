@@ -88,11 +88,6 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     profiles: [infinity]
-    command: >
-      bash -c "
-      source .venv/bin/activate &&
-      pip install 'infinity-sdk==0.6.0.dev3' &&
-      ./entrypoint.sh"
 
 volumes:
   mysql_data:
