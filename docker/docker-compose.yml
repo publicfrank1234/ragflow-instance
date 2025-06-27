@@ -46,7 +46,8 @@ services:
       - ragflow
 
   infinity:
-    image: infiniflow/infinity:nightly
+    # image: infiniflow/infinity:nightly
+    image: infiniflow/infinity:v0.5.2
     container_name: ragflow-infinity
     ports:
       - "23817:23817"
