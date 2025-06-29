@@ -88,6 +88,7 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     profiles: [infinity]
+    mem_limit: 2500m # ⬅️ Set memory limit to 2.5GB
 
 volumes:
   mysql_data:
