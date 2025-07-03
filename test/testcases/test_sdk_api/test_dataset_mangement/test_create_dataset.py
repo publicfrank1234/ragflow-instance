@@ -182,7 +182,7 @@ class TestDatasetCreate:
     @pytest.mark.parametrize(
         "name, embedding_model",
         [
-            ("BAAI/bge-large-zh-v1.5@BAAI", "BAAI/bge-large-zh-v1.5@BAAI"),
+            ("text-embedding-3-small@openai", "text-embedding-3-small@openai"),
             ("maidalun1020/bce-embedding-base_v1@Youdao", "maidalun1020/bce-embedding-base_v1@Youdao"),
             ("embedding-3@ZHIPU-AI", "embedding-3@ZHIPU-AI"),
         ],
@@ -238,7 +238,7 @@ class TestDatasetCreate:
     def test_embedding_model_unset(self, client):
         payload = {"name": "embedding_model_unset"}
         dataset = client.create_dataset(**payload)
-        assert dataset.embedding_model == "BAAI/bge-large-zh-v1.5@BAAI", str(dataset)
+        assert dataset.embedding_model == "text-embedding-3-small@openai", str(dataset)
 
     @pytest.mark.p2
     def test_embedding_model_none(self, client):

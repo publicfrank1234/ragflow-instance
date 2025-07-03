@@ -374,7 +374,7 @@ curl --request POST \
   - Maximum 65535 characters
 
 - `"embedding_model"`: (*Body parameter*), `string`  
-  The name of the embedding model to use. For example: `"BAAI/bge-large-zh-v1.5@BAAI"`
+  The name of the embedding model to use. For example: `"text-embedding-3-small@openai"`
   - Maximum 255 characters
   - Must follow `model_name@model_factory` format
 
@@ -449,7 +449,7 @@ Success:
         "created_by": "3af81804241d11f0a6a79f24fc270c7f",
         "description": null,
         "document_count": 0,
-        "embedding_model": "BAAI/bge-large-zh-v1.5@BAAI",
+        "embedding_model": "text-embedding-3-small@openai",
         "id": "3b4de7d4241d11f0a6a79f24fc270c7f",
         "language": "English",
         "name": "RAGFlow example",

@@ -255,7 +255,7 @@ class TestDatasetUpdate:
     @pytest.mark.parametrize(
         "embedding_model",
         [
-            "BAAI/bge-large-zh-v1.5@BAAI",
+            "text-embedding-3-small@openai",
             "maidalun1020/bce-embedding-base_v1@Youdao",
             "embedding-3@ZHIPU-AI",
         ],

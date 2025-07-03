@@ -643,7 +643,7 @@ def user_register(user_id, user):
                     "model_type": "embedding",
                     "api_key": "",
                     "api_base": "",
-                    "max_tokens": 1024 if buildin_embedding_model == "BAAI/bge-large-zh-v1.5@BAAI" else 512,
+                    "max_tokens": 1024 if buildin_embedding_model == "text-embedding-3-small@openai" else 512,
                 }
             )
 
