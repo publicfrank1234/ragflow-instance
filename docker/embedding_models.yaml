@@ -1,0 +1,6 @@
+- embd_id: text-embedding-3-small@openai
+  name: text-embedding-3-small
+  provider: openai
+  type: embedding
+  description: OpenAI small embedding model
+  enabled: true
