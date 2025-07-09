@@ -62,22 +62,21 @@ services:
       mysql:
         condition: service_healthy
     ports:
-      - 9380:9380
-      - 8081:80
+      - "8081:80"
+      - "9380:9380"      
       - "9443:443"
-      - 5678:5678
-      - 5679:5679
-      - 9382:9382
+      - "5678:5678"
+      - "5679:5679"
+      - "9382:9382"
     volumes:
       - ./ragflow-logs:/ragflow/logs
-      - ./nginx/ragflow.conf:/etc/nginx/conf.d/ragflow.conf
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/proxy.conf:/etc/nginx/proxy.conf
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ../history_data_agent:/ragflow/history_data_agent
-      - ./service_conf.yaml.template:/ragflow/conf/service_conf.yaml.template
       - ./entrypoint.sh:/ragflow/entrypoint.sh
       - ./embedding_models.yaml:/ragflow/conf/embedding_models.yaml
+      - ./service_conf.yaml.template:/ragflow/conf/service_conf.yaml.template
+      - ../history_data_agent:/ragflow/history_data_agent
     env_file: .env
     environment:
       - TZ=${TIMEZONE}
