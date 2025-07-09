@@ -62,7 +62,7 @@ services:
       mysql:
         condition: service_healthy
     ports:
-      - "8081:80"
+      - "8081:15678"
       - "9380:9380"      
       - "9443:443"
       - "5678:5678"
