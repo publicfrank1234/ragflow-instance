@@ -92,20 +92,6 @@ services:
     profiles: [infinity]
     mem_limit: 2500m # ⬅️ Set memory limit to 2.5GB
 
-  nginx:
-    image: nginx:latest
-    container_name: nginx-reverse-proxy
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx/conf.d:/etc/nginx/conf.d
-      - ./nginx/proxy.conf:/etc/nginx/proxy.conf
-    networks:
-      - sitepilot
-      - ragflow
-    restart: always
-
 volumes:
   mysql_data:
   minio_data:
